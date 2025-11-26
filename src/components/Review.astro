@@ -1,0 +1,50 @@
+---
+// components/Review.astro
+import { getCollection } from 'astro:content';
+
+interface Props {
+  reviewID?: number;
+}
+
+const { reviewID } = Astro.props;
+
+// Fetch all reviews
+const reviews = await getCollection('reviews');
+
+// If reviewID is provided, find that specific review
+const review = reviewID !== undefined ? reviews.find((r) => r.data.reviewID === reviewID) : null;
+---
+
+{
+  reviewID === undefined ? (
+    // List all reviews
+    <div>
+      {reviews.map((r) => (
+        <div>
+          <div>
+            <span>{r.data.reviewer}</span>
+          </div>
+          <p>{r.data.reviews}</p>
+          <div>
+            <span>{new Date(r.data.data).toLocaleDateString()}</span>
+            <span>{r.data.source}</span>
+          </div>
+        </div>
+      ))}
+    </div>
+  ) : review ? (
+    // Show single review
+    <div>
+      <div>
+        <span>{review.data.reviewer}</span>
+      </div>
+      <p>{review.data.reviews}</p>
+      <div>
+        <span>{new Date(review.data.data).toLocaleDateString()}</span>
+        <span>{review.data.source}</span>
+      </div>
+    </div>
+  ) : (
+    <p>Review with ID {reviewID} not found.</p>
+  )
+}

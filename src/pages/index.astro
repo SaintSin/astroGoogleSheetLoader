@@ -2,6 +2,7 @@
 // pages/index.astro
 import { getConfiguredImageService, Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
+import Review from '@components/Review.astro';
 import Layout from '@layouts/BaseLayout.astro';
 
 const meta = {
@@ -14,10 +15,6 @@ const meta = {
 // Fetch data from Google Sheets via content collection
 const products = await getCollection('products');
 const reviews = await getCollection('reviews');
-
-// Filter for just reviewID 3
-// reviewID is now coerced to a number by the schema
-const reviewID3 = reviews.find((review) => review.data.reviewID === 3);
 ---
 
 <Layout metaData={meta}>
@@ -71,16 +68,8 @@ const reviewID3 = reviews.find((review) => review.data.reviewID === 3);
       }
 
       <h3>Review ID 3 Only</h3>
-      {
-        reviewID3 ? (
-          <div>
-            <p>Found review with ID 3:</p>
-            <pre>{JSON.stringify(reviewID3.data, null, 2)}</pre>
-          </div>
-        ) : (
-          <p>Review with ID 3 not found.</p>
-        )
-      }
+      <Review reviewID={3} />
+      <h3>All</h3><Review />
     </section>
   </main>
 </Layout>
