@@ -12,7 +12,10 @@ const { reviewID } = Astro.props;
 const reviews = await getCollection('reviews');
 
 // If reviewID is provided, find that specific review
-const review = reviewID !== undefined ? reviews.find((r) => r.data.reviewID === reviewID) : null;
+const review =
+  reviewID !== undefined
+    ? reviews.find((r) => r.data.reviewID === reviewID)
+    : null;
 ---
 
 {
