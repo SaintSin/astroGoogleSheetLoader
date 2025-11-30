@@ -87,7 +87,7 @@ export function googleSheetsLoader(options: GoogleSheetsLoaderOptions): Loader {
 
           // Create an object from the row
           // Initialize all headers with empty strings first
-          const entry: Record<string, any> = {};
+          const entry: Record<string, string> = {};
           headers.forEach((header) => {
             entry[header] = '';
           });
