@@ -9,6 +9,7 @@ export interface MetaData {
   title: string;
   /** Page description - used for SEO and social media previews */
   description: string;
+  variant: string;
   /** Open Graph image filename (stored in /public/images/social/) */
   imageOG?: string;
   /** Alt text for Open Graph image */

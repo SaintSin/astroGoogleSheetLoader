@@ -17,6 +17,8 @@ const products = defineCollection({
     Brand: z.string().default(''),
     ProductName: z.string().default(''),
     Description: z.string().default(''),
+    Variant: z.string().default(''),
+
     Specifications: z.string().default(''), // Note: plural with 's'
     'Price (THB)': z.string().default(''), // Note: has parentheses and space
     Category: z.string().default(''),
